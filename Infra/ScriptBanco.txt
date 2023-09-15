@@ -1,0 +1,40 @@
+﻿-- Tabela Veiculo
+CREATE TABLE Veiculo
+(
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Placa NVARCHAR(MAX) NOT NULL
+);
+
+-- Tabela Linha
+CREATE TABLE Linha
+(
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Nome NVARCHAR(MAX) NOT NULL,
+    Numero INT NOT NULL,
+    Origem NVARCHAR(MAX) NOT NULL,
+    Destino NVARCHAR(MAX) NOT NULL
+);
+
+-- Tabela Motorista
+CREATE TABLE Motorista
+(
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Nome NVARCHAR(MAX) NOT NULL,
+    Cpf NVARCHAR(MAX) NOT NULL
+);
+
+-- Tabela Viagem
+CREATE TABLE Viagem
+(
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    NumeroServico NVARCHAR(MAX) NOT NULL,
+    IdLinha INT NOT NULL,
+    IdMotorista INT NULL,
+    IdVeiculo INT NULL,
+    DataPartida DATETIME NOT NULL,
+    DataChegada DATETIME NOT NULL,
+    
+    FOREIGN KEY (IdLinha) REFERENCES Linha(Id),
+    FOREIGN KEY (IdMotorista) REFERENCES Motorista(Id),
+    FOREIGN KEY (IdVeiculo) REFERENCES Veiculo(Id)
+);
